@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:web_navigation_demo/components/sidebar.dart';
-import 'package:web_navigation_demo/components/topbar.dart';
+
 
 class ProfilePage extends StatelessWidget {
   final Widget child;
@@ -22,182 +21,170 @@ class ProfilePage extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 900;
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      body: Row(
-        children: [
-          const Sidebar(),
-          Expanded(
-            child: Column(
-              children: [
-                const Topbar(),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(
-                        horizontal: 55, vertical: 35),
-                    padding: const EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      children: [
-                        isSmallScreen
-                            ? Container(
-                                width: 70, // Compact width for small screens
-                                padding:
-                                    const EdgeInsets.only(left: 25,),
-                                child: Column(
-                                  children: options.map((option) {
-                                    // final isSelected = GoRouter.of(context)
-                                    //     .routerDelegate
-                                    //     .currentConfiguration
-                                    //     .uri
-                                    //     .toString()
-                                    //     .contains(option.toLowerCase());
-                                    final String currentPath =
-                                        GoRouter.of(context)
-                                            .routerDelegate
-                                            .currentConfiguration
-                                            .uri
-                                            .path;
-
-                                    final isSelected =
-                                        isMatchingRoute(option, currentPath);
-
-                                    return Column(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            String route = getRoute(option);
-                                            GoRouter.of(context).go(route);
-                                          },
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical:
-                                                    25.0, // Same vertical padding as in Expanded layout
-                                                horizontal:
-                                                    5.0), // Optional: Add horizontal padding if needed
-                                            child: Icon(
-                                              getIcon(option),
-                                              color: isSelected
-                                                  ? Colors.blue
-                                                  : Colors.black87,
-                                            ),
-                                          ),
-                                        ),
-                                        // Divider to match the one in expanded layout
-                                        Divider(
-                                          color: Colors.grey.shade200,
-                                          thickness: 1,
-                                          height: 12,
-                                        ),
-                                      ],
-                                    );
-                                  }).toList(),
-                                ),
-                              )
-                            : Expanded(
-                                child: ListView.builder(
-                                  itemCount: options.length,
-                                  itemBuilder: (context, index) {
-                                    final option = options[index];
-                                    final isSelected = GoRouter.of(context)
-                                        .routerDelegate
-                                        .currentConfiguration
-                                        .uri
-                                        .toString()
-                                        .contains(option.toLowerCase());
-
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 25, right: 20),
-                                      child: Column(
-                                        children: [
-                                          ListTile(
-                                            contentPadding:
-                                                const EdgeInsets.symmetric(
-                                                    vertical: 18.0,
-                                                    horizontal: 2.0),
-                                            leading: Container(
-                                              width: 40,
-                                              height: 40,
-                                              decoration: BoxDecoration(
-                                                color: isSelected
-                                                    ? Colors.blue
-                                                        .withOpacity(0.1)
-                                                    : Colors.transparent,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              child: Icon(
-                                                getIcon(option),
-                                                color: isSelected
-                                                    ? Colors.blue
-                                                    : Colors.black87,
-                                                size: 24,
-                                              ),
-                                            ),
-                                            title: Text(
-                                              option,
-                                              style: TextStyle(
-                                                color: isSelected
-                                                    ? Colors.blue
-                                                    : Colors.black87,
-                                                fontWeight: isSelected
-                                                    ? FontWeight.bold
-                                                    : FontWeight.w600,
-                                                fontSize: 16,
-                                              ),
-                                            ),
-                                            trailing: const Icon(
-                                              Icons.chevron_right,
-                                              color: Colors.grey,
-                                            ),
-                                            onTap: () {
-                                              String route = getRoute(option);
-                                              GoRouter.of(context).go(route);
-                                            },
-                                          ),
-                                          if (index != options.length - 1)
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 5),
-                                              child: Divider(
-                                                color: Colors.grey.shade200,
-                                                thickness: 1,
-                                                height: 1,
-                                              ),
-                                            ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+      body: Container(
+        margin: const EdgeInsets.symmetric(
+            horizontal: 55, vertical: 35),
+        padding: const EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Row(
+          children: [
+            isSmallScreen
+                ? Container(
+                    width: 70, // Compact width for small screens
+                    padding:
+                        const EdgeInsets.only(left: 25,),
+                    child: Column(
+                      children: options.map((option) {
+                        // final isSelected = GoRouter.of(context)
+                        //     .routerDelegate
+                        //     .currentConfiguration
+                        //     .uri
+                        //     .toString()
+                        //     .contains(option.toLowerCase());
+                        final String currentPath =
+                            GoRouter.of(context)
+                                .routerDelegate
+                                .currentConfiguration
+                                .uri
+                                .path;
+          
+                        final isSelected =
+                            isMatchingRoute(option, currentPath);
+          
+                        return Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                String route = getRoute(option);
+                                GoRouter.of(context).go(route);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical:
+                                        25.0, // Same vertical padding as in Expanded layout
+                                    horizontal:
+                                        5.0), // Optional: Add horizontal padding if needed
+                                child: Icon(
+                                  getIcon(option),
+                                  color: isSelected
+                                      ? Colors.blue
+                                      : Colors.black87,
                                 ),
                               ),
-                        VerticalDivider(
-                          color: Colors.grey.shade200,
-                          thickness: 1,
-                          width: 60, // Add some space between the sections
-                        ),
-                        Expanded(child: child),
-                      ],
+                            ),
+                            // Divider to match the one in expanded layout
+                            Divider(
+                              color: Colors.grey.shade200,
+                              thickness: 1,
+                              height: 12,
+                            ),
+                          ],
+                        );
+                      }).toList(),
+                    ),
+                  )
+                : Expanded(
+                    child: ListView.builder(
+                      itemCount: options.length,
+                      itemBuilder: (context, index) {
+                        final option = options[index];
+                        final isSelected = GoRouter.of(context)
+                            .routerDelegate
+                            .currentConfiguration
+                            .uri
+                            .toString()
+                            .contains(option.toLowerCase());
+          
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              left: 25, right: 20),
+                          child: Column(
+                            children: [
+                              ListTile(
+                                contentPadding:
+                                    const EdgeInsets.symmetric(
+                                        vertical: 18.0,
+                                        horizontal: 2.0),
+                                leading: Container(
+                                  width: 40,
+                                  height: 40,
+                                  decoration: BoxDecoration(
+                                    color: isSelected
+                                        ? Colors.blue
+                                            .withOpacity(0.1)
+                                        : Colors.transparent,
+                                    borderRadius:
+                                        BorderRadius.circular(8),
+                                  ),
+                                  child: Icon(
+                                    getIcon(option),
+                                    color: isSelected
+                                        ? Colors.blue
+                                        : Colors.black87,
+                                    size: 24,
+                                  ),
+                                ),
+                                title: Text(
+                                  option,
+                                  style: TextStyle(
+                                    color: isSelected
+                                        ? Colors.blue
+                                        : Colors.black87,
+                                    fontWeight: isSelected
+                                        ? FontWeight.bold
+                                        : FontWeight.w600,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                trailing: const Icon(
+                                  Icons.chevron_right,
+                                  color: Colors.grey,
+                                ),
+                                onTap: () {
+                                  String route = getRoute(option);
+                                  GoRouter.of(context).go(route);
+                                },
+                              ),
+                              if (index != options.length - 1)
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                  child: Divider(
+                                    color: Colors.grey.shade200,
+                                    thickness: 1,
+                                    height: 1,
+                                  ),
+                                ),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ),
-                ),
-              ],
+            VerticalDivider(
+              color: Colors.grey.shade200,
+              thickness: 1,
+              width: 60, // Add some space between the sections
             ),
-          ),
-        ],
+            Expanded(child: child),
+          ],
+        ),
       ),
     );
   }
 }
 
 bool isMatchingRoute(String option, String currentPath) {
-  // Normalize both the route and the option
+  // Normalize the current route: replace "-" with " " and make lowercase
+  String normalizedPath = currentPath.toLowerCase();
+  // Normalize the option: make lowercase and replace spaces with "-"
   String normalizedOption = option.toLowerCase().replaceAll(' ', '-');
-  String normalizedPath = currentPath.toLowerCase().replaceFirst('/', '');
-  return normalizedPath == normalizedOption;
+  // Check if the normalized path contains the normalized option
+  return normalizedPath.contains(normalizedOption);
 }
 
 

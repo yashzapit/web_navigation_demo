@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import '../components/sidebar.dart';
-import '../components/topbar.dart';
+
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -8,37 +7,19 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Row(
-        children: [
-          // Sidebar for navigation
-          const Sidebar(),
-          Expanded(
-            child: Column(
-              children: [
-                // Topbar with Profile navigation
-                const Topbar(),
-                const SizedBox(height: 16),
-                // Main dashboard content
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(35),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          if (constraints.maxWidth > 800) {
-                            return _buildWideScreenLayout();
-                          } else {
-                            return _buildSmallScreenLayout();
-                          }
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(35),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              if (constraints.maxWidth > 800) {
+                return _buildWideScreenLayout();
+              } else {
+                return _buildSmallScreenLayout();
+              }
+            },
           ),
-        ],
+        ),
       ),
     );
   }
